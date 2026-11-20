@@ -1,0 +1,29 @@
+enable
+config t
+# Local LAN Port
+interface GigabitEthernet0/0
+ip address 192.168.99.1 255.255.255.192
+no shut
+
+# Branch 1 Connection Port
+interface GigabitEthernet0/1
+ip address 10.0.0.1 255.255.255.252
+no shut
+
+# Branch 2 Connection Port
+interface GigabitEthernet0/2
+ip address 11.0.0.1 255.255.255.252
+no shut
+
+# RIP Routing Setup
+router rip
+version 2
+no auto-summary
+network 192.168.99.0
+network 10.0.0.0
+network 11.0.0.0
+exit
+
+-------------------------------------------------
+
+Project Title: Design and Configuration of a Secure Banking Network1. Network Overview:Ei proshnotite amra ekta multi-branch banking network design korechi jekhane ekta Main Branch (Head Office) ebong duti Sub-Branch (Branch 1 & Branch 2) ache. Network-er prodhan uddeshyo holo shobgulo branch-er PC jate Head Office-er Web Server ebong DNS Server access korte pare ebong DHCP-er maddhome swongkiyobhabe (automatically) IP Address praptho hoy.2. Device Descriptions & Roles:Router (Layer 3 Device):Router holo ei network-er brain. Eti bhinno bhinno subnet-er moddhe connection tori kore. Amra ekhane RIP (Routing Information Protocol) Version 2 bebohar korechi jate Main Router ebong Branch Router-gulo ek-oporer rasta (routing table) chinte pare. Branch Router-e amra ip helper-address command bebohar korechi jate Branch-er PC-gulo Head Office-er DHCP server theke IP nite pare.Switch (Layer 2 Device):Switch holo local connectivity-r prodhan madhyom. Eti Head Office ebong protiti Branch-er PC, Server ebong Router-ke ekshathe jukto kore ekta Local Area Network (LAN) tori koreche.Web Server:Eti Banking Portal ba Internal Website host korar jono bebohar kora hoyeche. Protiti PC ei server-er IP ($192.168.99.2$) ping kore connectivity nishchit korche.DNS Server:DNS Server-er kaj holo Domain Name-ke IP-te rupantor kora. Amader network-er shob pisi-tei DNS IP ($192.168.99.3$) config kora hoyeche jate tara name-er maddhome server khuje pay.DHCP Server:Eti central IP management-er jono bebohar kora hoyeche. Ekhane alada alada DHCP Pool tori kora hoyeche jate Head Office, Branch 1 ebong Branch 2 nij nij subnet ($192.168.99.0/26$) onusare IP pay.Personal Computer (PC):PC gulo hocche End-User device. Egulo DHCP-er maddhome IP praptho hoy ebong ping-er maddhome Head Office-er sathe jogajog nishchit kore.3. Key Configuration Highlights:Subnetting: Amra classless IP addressing bebohar korechi jekhane Subnet Mask holo $255.255.255.192$. Eti network-ke choto choto bhage (Head Office, Branch 1, Branch 2) bhag korte sahajyo koreche.Routing: RIP v2 ebong no auto-summary command beboharer fole network-er path selection khub-i accurate hoyeche.Connectivity: Connectivity check korar jono ping command bebohar kora hoyeche, jekhane success rate 100% asche, ja nishchit kore j network-ti assignment-er shobgulo shorto puron koreche.
